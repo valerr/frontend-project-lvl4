@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
+import faker from 'faker';
+import Cookies from 'js-cookie';
 import reducer from './reducers';
 import actions from './actions';
 
@@ -12,6 +14,11 @@ const state = {
   messages: [],
 };
 
+const createUser = () => {
+  const name = faker.name.findName();
+  Cookies.set('name', name);
+};
+
 const init = (gon) => {
   const store = configureStore({
     reducer,
@@ -19,12 +26,16 @@ const init = (gon) => {
     state,
   });
 
-  store.dispatch(actions.fetchChannels(gon));
-  // store.dispatch(fetchMessages(gon));
+  store.dispatch(actions.fetchData(gon));
+
+  const Context = React.createContext('name');
+  createUser();
 
   ReactDOM.render(
     <Provider store={store}>
-      <App />,
+      <Context.Provider value={Cookies.get('name')}>
+        <App />
+      </Context.Provider>
     </Provider>,
     document.getElementById('chat'),
   );

@@ -6,7 +6,7 @@ const App = () => (
     <div className="col-3 border-right">
       <div className="d-flex mb-2">
         <span>Channels</span>
-        <button className="btn btn-link p-0 ml-auto">{'+'}</button>
+        <button className="btn btn-link p-0 ml-auto" type="button">+</button>
       </div>
       <Channels />
     </div>
@@ -15,7 +15,7 @@ const App = () => (
         <div id="messages" className="chat-messages overflow-auto mb-3">
           messages
         </div>
-          input
+        input
       </div>
     </div>
   </div>

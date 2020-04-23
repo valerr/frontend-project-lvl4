@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 const Channels = () => {
   const channels = useSelector((state) => state.channels);
-  console.log(channels);
   return (
     <ul className="nav flex-column nav-pills nav-fill">
       {channels.map(({ id, name }) => (

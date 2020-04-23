@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
 
-const fetchChannels = createAction('fetchChannels');
+const fetchData = createAction('fetchChannels');
 
-export default { fetchChannels };
+export default { fetchData };
