@@ -5,7 +5,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import faker from 'faker';
 import Cookies from 'js-cookie';
 import reducer from './reducers';
-import actions from './actions';
+import { fetchData } from './actions';
+import Context from './Context';
 
 import App from './components/App';
 
@@ -26,9 +27,8 @@ const init = (gon) => {
     state,
   });
 
-  store.dispatch(actions.fetchData(gon));
+  store.dispatch(fetchData(gon));
 
-  const Context = React.createContext('name');
   createUser();
 
   ReactDOM.render(

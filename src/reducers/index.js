@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import actions from '../actions';
+import * as actions from '../actions';
 
 const reducer = createReducer({}, {
   [actions.fetchData]: (state, action) => {
@@ -9,6 +9,9 @@ const reducer = createReducer({}, {
       channels,
       messages,
     };
+  },
+  [actions.sendMessage]: (state, { payload: { attributes } }) => {
+    state.messages.push(attributes);
   },
 });
 
