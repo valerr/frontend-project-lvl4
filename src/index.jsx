@@ -4,8 +4,9 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import faker from 'faker';
 import Cookies from 'js-cookie';
+import io from 'socket.io-client';
 import reducer from './reducers';
-import { fetchData } from './actions';
+import { fetchData, messageReceived } from './actions';
 import Context from './Context';
 
 import App from './components/App';
@@ -13,6 +14,7 @@ import App from './components/App';
 const state = {
   channels: [],
   messages: [],
+  currentChannelId: 1,
 };
 
 const createUser = () => {
@@ -28,6 +30,11 @@ const init = (gon) => {
   });
 
   store.dispatch(fetchData(gon));
+  const socket = io();
+
+  socket.on('newMessage', ({ data }) => {
+    store.dispatch(messageReceived(data));
+  });
 
   createUser();
 

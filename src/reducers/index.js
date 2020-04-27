@@ -3,14 +3,15 @@ import * as actions from '../actions';
 
 const reducer = createReducer({}, {
   [actions.fetchData]: (state, action) => {
-    const { channels, messages } = action.payload;
+    const { channels, messages, currentChannelId } = action.payload;
     return {
       ...state,
       channels,
       messages,
+      currentChannelId,
     };
   },
-  [actions.sendMessage]: (state, { payload: { attributes } }) => {
+  [actions.messageReceived]: (state, { payload: { attributes } }) => {
     state.messages.push(attributes);
   },
 });

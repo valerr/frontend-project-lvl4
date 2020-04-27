@@ -4,6 +4,8 @@ import routes from '../routes';
 
 export const fetchData = createAction('fetchChannels');
 
+export const messageReceived = createAction('messageReceived');
+
 export const sendMessage = ({ username, message, channelId }) => async () => {
   const path = routes.channelMessagesPath(channelId);
   const data = { attributes: { username, message } };

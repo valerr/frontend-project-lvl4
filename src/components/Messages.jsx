@@ -1,5 +1,5 @@
-import React from 'react';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
+
 import { Formik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -17,28 +17,34 @@ const validate = (values) => {
 const Messages = () => {
   const messages = useSelector((state) => state.messages);
   const dispatch = useDispatch();
-  const username = useContext(Context);
+  const userName = useContext(Context);
+  const currentChannelId = useSelector((state) => state.currentChannelId);
 
   const handleSubmit = async (values, actions) => {
     const data = {
-      username,
+      username: userName,
       message: values.message,
+      channelId: currentChannelId,
     };
     await dispatch(sendMessage(data));
     actions.setSubmitting(false);
   };
 
+  const filteredMessages = messages.filter((message) => message.channelId === currentChannelId);
+
   return (
     <>
       <div id="messages" className="chat-messages overflow-auto mb-3">
-        {messages.map(({
+        {filteredMessages.map(({
           username, message, id,
         }) => (
-          {/* TODO filter by channel */},
-            <div key={id}>
-              <span className="font-weight-bold">{username}: </span>
-              {message}
-            </div>
+          <div key={id}>
+            <span className="font-weight-bold">
+              {username}
+              :
+            </span>
+            {message}
+          </div>
         ))}
       </div>
       <Formik initialValues={{ message: '' }} validate={validate} onSubmit={handleSubmit}>
