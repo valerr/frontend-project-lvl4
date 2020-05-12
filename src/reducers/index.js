@@ -14,6 +14,12 @@ const reducer = createReducer({}, {
   [actions.messageReceived]: (state, { payload: { attributes } }) => {
     state.messages.push(attributes);
   },
+  [actions.setCurrentChannelId]: (state, { payload: { id } }) => (
+    {
+      ...state,
+      currentChannelId: id,
+    }
+  ),
 });
 
 export default reducer;

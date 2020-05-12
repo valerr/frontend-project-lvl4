@@ -11,12 +11,6 @@ import Context from './Context';
 
 import App from './components/App';
 
-const state = {
-  channels: [],
-  messages: [],
-  currentChannelId: 1,
-};
-
 const createUser = () => {
   const name = faker.name.findName();
   Cookies.set('name', name);
@@ -26,8 +20,11 @@ const init = (gon) => {
   const store = configureStore({
     reducer,
     devTools: process.env.NODE_ENV !== 'production',
-    state,
   });
+
+  if (!Cookies.get('name')) {
+    createUser();
+  }
 
   store.dispatch(fetchData(gon));
   const socket = io();
@@ -35,8 +32,6 @@ const init = (gon) => {
   socket.on('newMessage', ({ data }) => {
     store.dispatch(messageReceived(data));
   });
-
-  createUser();
 
   ReactDOM.render(
     <Provider store={store}>

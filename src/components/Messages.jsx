@@ -28,6 +28,7 @@ const Messages = () => {
     };
     await dispatch(sendMessage(data));
     actions.setSubmitting(false);
+    actions.setFieldValue('message', '', false);
   };
 
   const filteredMessages = messages.filter((message) => message.channelId === currentChannelId);
@@ -60,6 +61,7 @@ const Messages = () => {
                     value={props.values.message}
                     name="message"
                     id="message"
+                    disabled={props.isSubmitting}
                   />
                   {props.errors.message && <div id="feedback" className="d-block invalid-feedback">{props.errors.message}</div>}
                 </div>
