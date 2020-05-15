@@ -6,7 +6,7 @@ import faker from 'faker';
 import Cookies from 'js-cookie';
 import io from 'socket.io-client';
 import reducer from './reducers';
-import { fetchData, messageReceived, channelAdded } from './actions';
+import { fetchData, messageReceived, channelAdded, channelRemoved } from './actions';
 import Context from './Context';
 
 import App from './components/App';
@@ -36,6 +36,14 @@ const init = (gon) => {
   socket.on('newChannel', ({ data }) => {
     store.dispatch(channelAdded(data));
   });
+
+  socket.on('removeChannel', ({ data }) => {
+    store.dispatch(channelRemoved(data));
+  });
+
+  // socket.on('renameChannel', ({ data }) => {
+  //   store.dispatch(channelRenamed(data));
+  // });
 
   ReactDOM.render(
     <Provider store={store}>

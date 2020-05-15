@@ -8,7 +8,7 @@ const Add = ({ hideModal, addChannel }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = async (values) => {
-    const channel = { id: _.uniqueId(), name: values.body, removable: true };
+    const channel = { name: values.body };
     await dispatch(addChannel(channel));
     hideModal();
   };

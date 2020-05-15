@@ -23,6 +23,14 @@ const reducer = createReducer({}, {
   [actions.channelAdded]: (state, { payload: { attributes } }) => {
     state.channels.push(attributes);
   },
+  [actions.channelRemoved]: (state, { payload: { id } }) => {
+    const filtered = state.channels.filter((ch) => ch.id !== id);
+    return {
+      ...state,
+      channels: filtered,
+      currentChannelId: 1,
+    }
+  },
 });
 
 export default reducer;

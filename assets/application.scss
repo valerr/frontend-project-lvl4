@@ -6,3 +6,25 @@
   left: 30%;
 }
 
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #44a4db;
+    font-weight: bold;
+    border-radius: 0;
+}
+
+.btn .btn-primary {
+    background-color: #3488e1;
+}
+
+.modal-content {
+  background-color: #fafcfd;
+}
+
+.nav-link {
+    display: block;
+    padding: 0;
+}
+
+.badge {
+  font-size: 100%;
+}
