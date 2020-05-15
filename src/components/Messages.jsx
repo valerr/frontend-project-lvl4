@@ -43,6 +43,7 @@ const Messages = () => {
             <span className="font-weight-bold">
               {username}
               :
+              &nbsp;
             </span>
             {message}
           </div>

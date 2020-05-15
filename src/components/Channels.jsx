@@ -14,14 +14,17 @@ const Channels = () => {
 
   return (
     <>
-      <div className="d-flex mb-2">
-        <span>Channels</span>
-        <button className="btn btn-link p-0 ml-auto" type="button">+</button>
-      </div>
       <ul className="nav flex-column nav-pills nav-fill">
         {channels.map(({ id, name }) => (
           <li className="nav-item" key={id}>
-            <button onClick={switchChannel(id)} className={cn('nav-link btn btn-block', { active: id === currentChannelId })} type="button">{name}</button>
+            <button
+              onClick={switchChannel(id)}
+              className={cn('nav-link btn btn-block',
+                { active: id === currentChannelId })}
+              type="button"
+            >
+              {name}
+            </button>
           </li>
         ))}
       </ul>

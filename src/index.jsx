@@ -6,7 +6,7 @@ import faker from 'faker';
 import Cookies from 'js-cookie';
 import io from 'socket.io-client';
 import reducer from './reducers';
-import { fetchData, messageReceived } from './actions';
+import { fetchData, messageReceived, channelAdded } from './actions';
 import Context from './Context';
 
 import App from './components/App';
@@ -31,6 +31,10 @@ const init = (gon) => {
 
   socket.on('newMessage', ({ data }) => {
     store.dispatch(messageReceived(data));
+  });
+
+  socket.on('newChannel', ({ data }) => {
+    store.dispatch(channelAdded(data));
   });
 
   ReactDOM.render(

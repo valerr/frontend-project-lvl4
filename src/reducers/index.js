@@ -20,6 +20,9 @@ const reducer = createReducer({}, {
       currentChannelId: id,
     }
   ),
+  [actions.channelAdded]: (state, { payload: { attributes } }) => {
+    state.channels.push(attributes);
+  },
 });
 
 export default reducer;
