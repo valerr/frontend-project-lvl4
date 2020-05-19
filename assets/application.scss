@@ -6,25 +6,35 @@
   left: 30%;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    background-color: #44a4db;
-    font-weight: bold;
-    border-radius: 0;
-}
+.btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: none;
+  }
 
-.btn .btn-primary {
-    background-color: #3488e1;
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    border-radius: 0;
 }
 
 .modal-content {
   background-color: #fafcfd;
 }
 
-.nav-link {
-    display: block;
-    padding: 0;
+.bg-active {
+  background-color: #b7f2f4;
 }
 
-.badge {
-  font-size: 100%;
+#chat {
+  margin-top: 10px;
+}
+
+#messages {
+  margin-top: 10px;
+}
+
+.bg-white {
+  margin-top: -10px;
+}
+
+.bg-navbar {
+  background-color: #9b9ea21c;
 }

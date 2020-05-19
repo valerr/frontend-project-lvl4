@@ -26,5 +26,5 @@ export const addChannel = ({ name }) => async () => {
 
 export const removeChannel = (id) => async () => {
   const path = routes.channelPath(id);
-  await axios.delete(path).catch(err => err.message);
+  await axios.delete(path);
 };

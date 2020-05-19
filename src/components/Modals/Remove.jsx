@@ -13,7 +13,11 @@ const Remove = ({ channel, hideModal, removeChannel }) => {
   return (
     <Modal.Dialog>
       <Modal.Header closeButton onHide={hideModal}>
-        <Modal.Title>Remove #{channel.name}?</Modal.Title>
+        <Modal.Title>
+          Remove #
+          {channel.name}
+          ?
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form onSubmit={handleSubmit}>

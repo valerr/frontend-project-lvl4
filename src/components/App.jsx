@@ -8,7 +8,14 @@ const App = () => {
   const renderModal = (modal, hideModal) => {
     if (modal.type === null) return null;
     const ModalComponent = getModal(modal.type);
-    return <ModalComponent hideModal={hideModal} addChannel={addChannel} removeChannel={removeChannel} channel={modal.channel} />;
+    return (
+      <ModalComponent
+        hideModal={hideModal}
+        addChannel={addChannel}
+        removeChannel={removeChannel}
+        channel={modal.channel}
+      />
+    );
   };
 
   const [modal, setModal] = useState({ type: null, channel: null });
@@ -19,12 +26,12 @@ const App = () => {
     <div className="row h-100 pb-3">
       <div className="col-3 border-right">
         <div className="d-flex mb-2">
-          <h4>Channels</h4>
+          <h5>Channels</h5>
           <button onClick={() => showModal('adding')} className="btn btn-link p-0 ml-auto" type="button">+</button>
         </div>
         <Channels showModal={showModal} />
       </div>
-      <div className="col h-100">
+      <div className="col h-100 bg-white">
         <div className="d-flex flex-column h-100">
           <Messages />
           {renderModal(modal, hideModal, addChannel)}

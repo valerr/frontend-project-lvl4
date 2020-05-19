@@ -29,7 +29,7 @@ const reducer = createReducer({}, {
       ...state,
       channels: filtered,
       currentChannelId: 1,
-    }
+    };
   },
 });
 
