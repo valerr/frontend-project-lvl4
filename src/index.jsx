@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 import io from 'socket.io-client';
 import reducer from './reducers';
 import {
-  fetchData, messageReceived, channelAdded, channelRemoved,
+  fetchData, messageReceived, channelAdded, channelRemoved, channelRenamed,
 } from './actions';
 import Context from './Context';
 
@@ -43,9 +43,9 @@ const init = (gon) => {
     store.dispatch(channelRemoved(data));
   });
 
-  // socket.on('renameChannel', ({ data }) => {
-  //   store.dispatch(channelRenamed(data));
-  // });
+  socket.on('renameChannel', ({ data }) => {
+    store.dispatch(channelRenamed(data));
+  });
 
   ReactDOM.render(
     <Provider store={store}>

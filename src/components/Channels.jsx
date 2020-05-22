@@ -26,8 +26,8 @@ const Channels = ({ showModal }) => {
                 <div className="col-10">{channel.name}</div>
               </button>
             </div>
-            <button className="col-1 btn" onClick={() => showModal('renaming', channel)} type="button">&#10000;</button>
-            <button className="col-1 btn" onClick={() => showModal('removing', channel)} type="button">&#10005;</button>
+            {channel.removable && (<button className="col-1 btn" onClick={() => showModal('renaming', channel)} type="button">&#10000;</button>)}
+            {channel.removable && (<button className="col-1 btn" onClick={() => showModal('removing', channel)} type="button">&#10005;</button>)}
           </li>
         ))}
       </ul>

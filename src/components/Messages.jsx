@@ -6,10 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import Context from '../Context';
 import { sendMessage } from '../actions';
 
+import i18next from '../locales/translate';
+
 const validate = (values) => {
   const errors = {};
   if (!values.message) {
-    errors.message = 'Message should not be empty';
+    errors.message = 'notifications.emptyMessage';
   }
   return errors;
 };
@@ -19,6 +21,7 @@ const Messages = () => {
   const dispatch = useDispatch();
   const userName = useContext(Context);
   const currentChannelId = useSelector((state) => state.currentChannelId);
+  const notification = {};
 
   const handleSubmit = async (values, actions) => {
     const data = {
@@ -26,9 +29,14 @@ const Messages = () => {
       message: values.message,
       channelId: currentChannelId,
     };
-    await dispatch(sendMessage(data));
-    actions.setSubmitting(false);
-    actions.setFieldValue('message', '', false);
+    try {
+      await dispatch(sendMessage(data));
+      actions.setSubmitting(false);
+      actions.setFieldValue('message', '', false);
+      notification.message = '';
+    } catch {
+      notification.message = 'notifications.networkError';
+    }
   };
 
   const filteredMessages = messages.filter((message) => message.channelId === currentChannelId);
@@ -64,7 +72,8 @@ const Messages = () => {
                     id="message"
                     disabled={props.isSubmitting}
                   />
-                  {props.errors.message && <div id="feedback" className="d-block invalid-feedback">{props.errors.message}</div>}
+                  {props.errors.message && <div id="feedback" className="d-block invalid-feedback">{i18next.t(props.errors.message)}</div>}
+                  {notification.message && <div className="d-block invalid-feedback">{i18next.t(notification.message)}</div>}
                 </div>
               </div>
             </form>

@@ -2,19 +2,13 @@ import React, { useState } from 'react';
 import Channels from './Channels';
 import Messages from './Messages';
 import getModal from './Modals/index.js';
-import { addChannel, removeChannel } from '../actions';
 
 const App = () => {
   const renderModal = (modal, hideModal) => {
     if (modal.type === null) return null;
     const ModalComponent = getModal(modal.type);
     return (
-      <ModalComponent
-        hideModal={hideModal}
-        addChannel={addChannel}
-        removeChannel={removeChannel}
-        channel={modal.channel}
-      />
+      <ModalComponent hideModal={hideModal} channel={modal.channel} />
     );
   };
 
@@ -34,7 +28,7 @@ const App = () => {
       <div className="col h-100 bg-white">
         <div className="d-flex flex-column h-100">
           <Messages />
-          {renderModal(modal, hideModal, addChannel)}
+          {renderModal(modal, hideModal)}
         </div>
       </div>
     </div>

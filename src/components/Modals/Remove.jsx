@@ -1,8 +1,9 @@
 import React from 'react';
 import { Modal, FormGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import { removeChannel } from '../../actions';
 
-const Remove = ({ channel, hideModal, removeChannel }) => {
+const Remove = ({ channel, hideModal }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = async () => {

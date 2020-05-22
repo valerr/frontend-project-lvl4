@@ -10,6 +10,8 @@ export const channelAdded = createAction('channelAdded');
 
 export const channelRemoved = createAction('channelRemoved');
 
+export const channelRenamed = createAction('channelRenamed');
+
 export const setCurrentChannelId = createAction('setCurrentChannelId');
 
 export const sendMessage = ({ username, message, channelId }) => async () => {
@@ -27,4 +29,10 @@ export const addChannel = ({ name }) => async () => {
 export const removeChannel = (id) => async () => {
   const path = routes.channelPath(id);
   await axios.delete(path);
+};
+
+export const renameChannel = (id, { name }) => async () => {
+  const path = routes.channelPath(id);
+  const data = { attributes: { name } };
+  await axios.patch(path, { data });
 };

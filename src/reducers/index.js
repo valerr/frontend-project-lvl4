@@ -1,4 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
+import { remove } from 'lodash';
 import * as actions from '../actions';
 
 const reducer = createReducer({}, {
@@ -24,12 +25,11 @@ const reducer = createReducer({}, {
     state.channels.push(attributes);
   },
   [actions.channelRemoved]: (state, { payload: { id } }) => {
-    const filtered = state.channels.filter((ch) => ch.id !== id);
-    return {
-      ...state,
-      channels: filtered,
-      currentChannelId: 1,
-    };
+    remove(state.channels, (ch) => ch.id === id);
+  },
+  [actions.channelRenamed]: (state, { payload: { id, attributes: { name } } }) => {
+    remove(state.channels, (ch) => ch.id === id);
+    state.channels.push({ id, name, removable: true });
   },
 });
 

@@ -2,34 +2,36 @@ import React, { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import { Modal, FormGroup, FormControl } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { addChannel } from '../../actions';
+import { renameChannel } from '../../actions';
 
-const Add = ({ hideModal }) => {
+const Rename = ({ channel, hideModal }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = async (values) => {
-    const channel = { name: values.body };
-    await dispatch(addChannel(channel));
+    await dispatch(renameChannel(channel.id, { name: values.body }));
     hideModal();
   };
 
   const ref = useRef();
 
   useEffect(() => {
-    ref.current.focus();
-  });
+    ref.current.select();
+  }, []);
 
-  const f = useFormik({ onSubmit: handleSubmit, initialValues: { body: '' } });
+  const f = useFormik({ onSubmit: handleSubmit, initialValues: { body: channel.name } });
 
   return (
     <Modal.Dialog>
       <Modal.Header closeButton onHide={hideModal}>
-        <Modal.Title>Add new channel:</Modal.Title>
+        <Modal.Title>
+          Rename #
+          {channel.name}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form onSubmit={f.handleSubmit}>
           <FormGroup>
-            <FormControl ref={ref} onChange={f.handleChange} value={f.values.body} required name="body" />
+            <FormControl ref={ref} onChange={f.handleChange} data-testid="input-body" name="body" required value={f.values.body} />
           </FormGroup>
           <input className="btn btn-primary" type="submit" value="submit" />
         </form>
@@ -38,4 +40,4 @@ const Add = ({ hideModal }) => {
   );
 };
 
-export default Add;
+export default Rename;
