@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
-import { setCurrentChannelId } from '../actions';
+import { actions } from '../slices/index.js';
 
 const Channels = ({ showModal }) => {
   const channels = useSelector((state) => state.channels);
@@ -9,7 +9,7 @@ const Channels = ({ showModal }) => {
   const dispatch = useDispatch();
 
   const switchChannel = (id) => () => {
-    dispatch(setCurrentChannelId({ id }));
+    dispatch(actions.setCurrentChannelId({ id }));
   };
 
   return (

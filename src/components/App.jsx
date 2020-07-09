@@ -17,9 +17,9 @@ const App = () => {
   const hideModal = () => setModal({ type: null, channel: null });
 
   return (
-    <div className="row h-100 pb-3">
+    <div className="row h-100">
       <div className="col-3 border-right">
-        <div className="d-flex mb-2">
+        <div className="d-flex mb-2 mt-2">
           <h5>Channels</h5>
           <button onClick={() => showModal('adding')} className="btn btn-link p-0 ml-auto" type="button">+</button>
         </div>

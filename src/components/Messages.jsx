@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Context from '../Context';
-import { sendMessage } from '../actions';
+import { actions as messagesActions } from '../slices/index.js';
 
 import i18next from '../locales/translate';
 
@@ -30,7 +30,7 @@ const Messages = () => {
       channelId: currentChannelId,
     };
     try {
-      await dispatch(sendMessage(data));
+      await dispatch(messagesActions.sendMessage(data));
       actions.setSubmitting(false);
       actions.setFieldValue('message', '', false);
       notification.message = '';
@@ -43,7 +43,7 @@ const Messages = () => {
 
   return (
     <>
-      <div id="messages" className="chat-messages overflow-auto mb-3">
+      <div id="messages" className="chat-messages overflow-auto mb-3 mt-2">
         {filteredMessages.map(({
           username, message, id,
         }) => (

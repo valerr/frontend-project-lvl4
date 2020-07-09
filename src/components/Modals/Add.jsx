@@ -2,14 +2,14 @@ import React, { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import { Modal, FormGroup, FormControl } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { addChannel } from '../../actions';
+import { actions } from '../../slices/index.js';
 
 const Add = ({ hideModal }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = async (values) => {
     const channel = { name: values.body };
-    await dispatch(addChannel(channel));
+    await dispatch(actions.addChannel(channel));
     hideModal();
   };
 
